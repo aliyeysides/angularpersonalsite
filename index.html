@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html ng-app="ayApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Welcome, Stranger</title>
+
+    <!-- Styles Region -->
+    <!-- font awesome from BootstrapCDN -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Bootstrap.css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" charset="utf-8">
+
+    <!-- Site.less -->
+    <link rel="stylesheet/less" href="less/site.less" charset="utf-8">
+    <!-- End Styles Region -->
+
+    <!-- Scripts Region -->
+    <!-- Less.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+
+    <!-- jQuery 2.1.4 min -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+    <!-- Bootstrap.js -->
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+    <!-- Angular.js 1.4x (stable) min -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+    <!-- End Scripts Region-->
+
+    <!-- app.js -->
+    <script type="text/javascript" src="app/app.js"></script>
+
+  </head>
+
+  <body>
+    <!-- yield -->
+    <div ng-view class="main-window"></div>
+  </body>
+</html>
