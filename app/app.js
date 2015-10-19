@@ -6,27 +6,22 @@ angular.module('ayApp', ['ngRoute'])
     })
   }])
 
-  .controller('AyShellGridController', ['$scope', function($scope){
-    $scope.entries = [];
-
-    $scope.addEntry = function(entry){
-      $scope.entries.push(entry);
-    };
-
-    $scope.$on('addEntry', function(e, args){
-      $scope.addEntry(args);
-    });
-
-  }])
-
   .directive('ayShellGrid', function(){
     return {
       restrict: 'E',
-      controller: 'AyShellGridController',
-      scope: {
-        entries: '='
-      },
-      templateUrl: 'app/src/templates/_shellGrid.html'
+      scope: {},
+      templateUrl: 'app/src/templates/_shellGrid.html',
+      link: function(scope, ele, attr){
+        scope.entries = [];
+
+        scope.addEntry = function(entry){
+          scope.entries.push(entry);
+        };
+
+        scope.$on('addEntry', function(e, args){
+          scope.addEntry(args);
+        });
+      }
     }
   })
 
@@ -37,8 +32,19 @@ angular.module('ayApp', ['ngRoute'])
     }
   })
 
+  .directive('autoFocus', ['$timeout', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            $timeout(function(){
+                element[0].focus();
+            }, 0);
+        }
+    }
+  }])
+
   .directive('ayShellInput', ['$rootScope', function($rootScope){
-    var template = '<input class="col-xs-12 shell-input" type="text" name="name" value="" enter-cmd="enterPressed()">';
+    var template = '<input auto-focus class="col-xs-12 shell-input" type="text" name="shellInput" value="" enter-cmd="enterPressed()">';
 
     return {
       restrict: 'E',
