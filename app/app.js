@@ -37,8 +37,19 @@ angular.module('ayApp', ['ngRoute'])
     }
   })
 
+  .directive('autoFocus', ['$timeout', function($timeout) {
+    return {
+        restrict: 'A',
+        link: function(scope, element) {
+            $timeout(function(){
+                element[0].focus();
+            }, 0);
+        }
+    }
+  }])
+
   .directive('ayShellInput', ['$rootScope', function($rootScope){
-    var template = '<input class="col-xs-12 shell-input" type="text" name="name" value="" enter-cmd="enterPressed()">';
+    var template = '<input auto-focus class="col-xs-12 shell-input" type="text" name="shellInput" value="" enter-cmd="enterPressed()">';
 
     return {
       restrict: 'E',
