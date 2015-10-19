@@ -6,6 +6,30 @@ angular.module('ayApp', ['ngRoute'])
     })
   }])
 
+  .controller('AyShellGridController', ['$scope', function($scope){
+    $scope.entries = [];
+
+    $scope.addEntry = function(entry){
+      $scope.entries.push(entry);
+    };
+
+    $scope.$on('addEntry', function(e, args){
+      $scope.addEntry(args);
+    });
+
+  }])
+
+  .directive('ayShellGrid', function(){
+    return {
+      restrict: 'E',
+      controller: 'AyShellGridController',
+      scope: {
+        entries: '='
+      },
+      templateUrl: 'app/src/templates/_shellGrid.html'
+    }
+  })
+
   .directive('ayTopNav', function(){
     return {
       restrict: 'E',
@@ -13,9 +37,28 @@ angular.module('ayApp', ['ngRoute'])
     }
   })
 
-  .directive('ayShellGrid', function(){
+  .directive('ayShellInput', ['$rootScope', function($rootScope){
+    var template = '<input class="col-xs-12 shell-input" type="text" name="name" value="" enter-cmd="enterPressed()">';
+
     return {
       restrict: 'E',
-      templateUrl: 'app/src/templates/_shellGrid.html'
+      replace: true,
+      template: template,
+      scope: {},
+      link: function(scope, ele, attr){
+
+        ele.bind('keydown', function(event){
+          if (event.which == 13) { // Captures enter btn event
+            scope.$apply(attr.enterCmd);
+          }
+        })
+
+        scope.enterPressed = function(){
+          var inputValue = ele[0].value; // User input value
+          $rootScope.$broadcast('addEntry', inputValue);
+          ele[0].value = '';
+        }
+
+      }
     }
-  })
+  }])

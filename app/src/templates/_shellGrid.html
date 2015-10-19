@@ -6,13 +6,27 @@
     <th class="col-xs-11">
       input space
     </th>
-  </thead>
+  </thead><!-- thead -->
+
   <tbody>
-    <td>
-      <h5>ay-cmd-line></h5>
-    </td>
-    <td>
-      <input class="col-xs-12 shell-input" type="text" name="name" value="">
-    </td>
-  </tbody>
+    <tr ng-if="entries" ng-repeat="entry in entries track by $index">
+      <td>
+        <h5>ay-cmd-line></h5>
+      </td>
+      <td>
+        <span ng-bind="entry"></span>
+      </td>
+    </tr><!-- row -->
+
+    <tr>
+      <td>
+        <h5>ay-cmd-line></h5>
+      </td>
+      <td>
+        <ay-shell-input></ay-shell-input>
+      </td>
+    </tr><!-- row -->
+
+  </tbody><!-- tbody -->
+
 </table>
