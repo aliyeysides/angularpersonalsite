@@ -6,27 +6,22 @@ angular.module('ayApp', ['ngRoute'])
     })
   }])
 
-  .controller('AyShellGridController', ['$scope', function($scope){
-    $scope.entries = [];
-
-    $scope.addEntry = function(entry){
-      $scope.entries.push(entry);
-    };
-
-    $scope.$on('addEntry', function(e, args){
-      $scope.addEntry(args);
-    });
-
-  }])
-
   .directive('ayShellGrid', function(){
     return {
       restrict: 'E',
-      controller: 'AyShellGridController',
-      scope: {
-        entries: '='
-      },
-      templateUrl: 'app/src/templates/_shellGrid.html'
+      scope: {},
+      templateUrl: 'app/src/templates/_shellGrid.html',
+      link: function(scope, ele, attr){
+        scope.entries = [];
+
+        scope.addEntry = function(entry){
+          scope.entries.push(entry);
+        };
+
+        scope.$on('addEntry', function(e, args){
+          scope.addEntry(args);
+        });
+      }
     }
   })
 
